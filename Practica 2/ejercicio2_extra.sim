@@ -1,0 +1,103 @@
+mvi a,00
+mvi b,00
+mvi c,00
+mvi d,01
+mvi e,00
+mvi h,00
+mvi l,00
+
+
+bucle_grande: inr b 
+
+mvi c,00 
+
+bucle_pequeño: inr c 
+mov a,b 
+mov e,a  
+LDAX d
+mov h,a 
+
+
+mov a,c 
+mov e,a 
+LDAX d
+
+
+cmp h
+JNZ se_repite
+
+
+LDA 0100 
+mov h,a 
+mov a,b 
+add h 
+mov e,a 
+LDAX D
+inr a 
+stax D
+
+se_repite: out 00 
+
+lda 0100
+cmp c
+JNZ bucle_pequeño
+
+
+lda 0100
+cmp b
+JNZ bucle_grande
+
+LDA 0100
+mov b,a
+
+mvi  e,00
+
+LDA 0100
+mov h,a
+add h
+mov c,a
+
+LDA 0100
+inr a 
+mov l,a
+
+
+bucle_comparacion: inr b
+
+mov a,b 
+mov e,a
+LDAX d 
+mov h,a 
+
+mov a,l
+mov e,a
+LDAX d
+
+cmp h
+JNC el_mayor_cambia
+
+mov a,b
+mov l,b
+
+el_mayor_cambia: out 00
+
+mov a,b
+cmp c
+JNZ bucle_comparacion
+
+LDA 0100 
+mov h,a
+mov a,l 
+sub h 
+mov l,a
+
+mov a,l 
+mov e,a 
+LDAX d 
+mov l,a 
+
+
+mov a,l
+out 00
+
+hlt

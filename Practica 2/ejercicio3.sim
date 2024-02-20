@@ -1,0 +1,29 @@
+@next 100
+in 00 
+dcr a
+mov c,a
+sumaresta:ldax b
+mov e,a
+add e 
+sub e
+jpe paridad
+jpo impar 
+impar: dcr c
+jz final
+jmp sumaresta 
+paridad: mvi a,80
+add e
+stax b
+dcr c
+jz final
+jmp sumaresta
+final: ldax b
+mov e,a
+add e 
+sub e
+jpe parfin
+hlt
+parfin:  mvi a,80
+add e
+stax b
+hlt
