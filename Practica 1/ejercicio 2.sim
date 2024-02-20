@@ -1,0 +1,23 @@
+in 02
+mov b,a
+in 01
+mov c,a
+in 00
+cpi 00
+jz suma
+cpi 01
+jz resta
+hlt
+suma:mov a,c
+add b
+out 03
+hlt
+resta: mov a,c
+cmp b
+jc restaneg
+sub b
+out 03
+hlt
+restaneg: mvi a,FF
+out 03
+hlt

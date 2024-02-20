@@ -1,0 +1,18 @@
+in 00
+mov b,a
+in 01
+mov c,a
+in 02
+mov d,a
+in 03
+cmp b
+jnc salto_1
+mov a,b
+salto_1: cmp c
+jnc salto_2
+mov a,c
+salto_2: cmp d
+jnc salto_3
+mov a,d
+salto_3: out 04
+hlt
