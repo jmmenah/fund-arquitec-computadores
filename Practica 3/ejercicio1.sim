@@ -1,0 +1,33 @@
+mvi c,00
+lda 0101
+cpi 00
+JZ 0DIVISOR
+mov c,a
+
+mvi b,00
+lda 0100
+cpi 00
+JZ 0DIVIDENDO
+mov b,a
+mvi d,00
+
+DIVISION: sub c
+cmp c
+inr d
+JC FINAL
+JMP DIVISION
+
+0DIVISOR: mvi a,00
+sta 0102 
+sta 0103
+hlt 
+
+0DIVIDENDO: mvi a,FF
+sta 0102
+sta 0103
+hlt
+
+FINAL: sta 0103
+mov a,d
+sta 0102
+hlt

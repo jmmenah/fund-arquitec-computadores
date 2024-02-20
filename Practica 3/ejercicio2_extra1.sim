@@ -1,0 +1,36 @@
+mvi h,00 
+mvi l,00
+lxi b,00FE
+
+in 00
+mov d,a
+
+in 01
+mov e,a
+
+bucle: mvi a,00
+cmp d
+JZ FIN
+dcr d
+inr h
+ldax b
+cmp e
+inx b
+JZ NUM_BUSCADO
+JMP bucle
+
+NUM_BUSCADO:inr l
+mov a,h
+out 02
+mov a,l
+out 03
+JMP bucle
+
+FIN:mvi a,00
+cmp l
+JZ NO_ELE
+hlt
+
+NO_ELE: mvi a,ff
+out 02
+hlt

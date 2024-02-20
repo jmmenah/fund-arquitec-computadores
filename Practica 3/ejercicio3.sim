@@ -1,0 +1,70 @@
+mvi d,00
+mvi e,00
+mvi h, 00
+mvi l, 00
+
+
+lxi b, 0100
+ldax b
+mov e,a
+lxi b, 0101
+ldax b
+cpi 01  
+JC FIN
+mov d,a
+mov a,e          
+cpi 03
+JC FIN
+JZ FIN
+mov e,a
+
+
+lxi b, 0102
+ldax b
+mov l,a
+lxi b, 0103
+ldax b
+cpi 01    
+JC FIN
+mov h,a
+mov a,l
+cpi 03     
+JC FIN
+JZ FIN
+mov l,a
+
+
+mov a,h
+cmp d
+JC FIN
+mov h,a
+mov a,l
+cmp e
+JC FIN
+mov l,a
+
+
+mvi b,00
+mvi c,00
+in 00
+mov b,a
+bucle: ldax d
+inx d
+cmp b
+JZ SIELEMENTO
+seguir: mov a,l
+cmp e
+JC FINAL
+jmp bucle
+
+
+FIN: mvi a,FF
+out 01
+hlt
+
+SIELEMENTO: inr c
+jmp seguir
+
+FINAL: mov a,c
+out 01
+hlt
